@@ -1,4 +1,4 @@
-import { App, Category } from "~/utils/schema";
+import type { App, Category } from "~/utils/schema";
 import AppCard from "./AppCard";
 
 export default function CategoryCard({ category, apps }: { category: Category, apps: App[] }) {
