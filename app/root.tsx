@@ -1,4 +1,5 @@
-import { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -6,10 +7,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { userPrefs } from "./utils/cookie";
 
 export const links: LinksFunction = () => [
   {
@@ -18,8 +21,16 @@ export const links: LinksFunction = () => [
 ]
 
 
+export const loader: LoaderFunction = async({request}) => {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie =
+    (await userPrefs.parse(cookieHeader)) || {};
+  return json({ themeColor: cookie.themeColor });
+}
+
 
 export default function App() {
+  const {themeColor} = useLoaderData<typeof loader>()
   return (
     <html lang="en">
       <head>
@@ -28,7 +39,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body data-theme={themeColor || "dark"}>
         <Header />
         <main className="mt-4">
           <Outlet />
