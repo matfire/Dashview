@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const categorySchema = z.object({
-  name: z.string(),
+  name: z.string({required_error:"please provide a name for each category"}),
   icon: z.string().optional(),
   color: z
     .string()
@@ -14,8 +14,8 @@ const categorySchema = z.object({
 
 const appSchema = z.object({
   category: z.string().optional(),
-  name: z.string(),
-  url: z.string().url(),
+  name: z.string({required_error:"please provide a name for each application"}),
+  url: z.string({required_error:"please provide a url for each application"}).url({message:"please provide a valid url for each application"}),
   icon: z.string().optional(),
 });
 
@@ -34,9 +34,9 @@ const configSchema = z
       } else {
         return apps.some((e) => {
           return (
-            categories.find(
+            categories.findIndex(
               (c) => c.name === e.category || c.id === e.category
-            ) !== undefined
+            ) !== -1
           );
         });
       }
