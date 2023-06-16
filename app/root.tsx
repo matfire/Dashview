@@ -40,11 +40,11 @@ export default function App() {
         <Links />
       </head>
       <body data-theme={themeColor ?? "dark"}>
-          <Header />
-          <main className="mt-4 mx-auto container">
-            <Outlet />
-          </main>
-          <Footer />
+        <Header />
+        <main className="mt-4 mx-auto container">
+          <Outlet />
+        </main>
+        <Footer />
 
         <ScrollRestoration />
         <Scripts />
