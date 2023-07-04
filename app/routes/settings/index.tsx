@@ -31,8 +31,8 @@ export default function Settings() {
   useEffect(() => {
     setTheme(
       themeColor ||
-        document?.documentElement?.getAttribute("data-theme") ||
-        "dark"
+      document?.documentElement?.getAttribute("data-theme") ||
+      "dark"
     );
   }, [themeColor]);
 

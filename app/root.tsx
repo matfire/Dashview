@@ -21,7 +21,7 @@ export const links: LinksFunction = () => [
 ]
 
 
-export const loader: LoaderFunction = async({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("Cookie");
   const cookie =
     (await userPrefs.parse(cookieHeader)) || {};
@@ -30,7 +30,7 @@ export const loader: LoaderFunction = async({request}) => {
 
 
 export default function App() {
-  const {themeColor} = useLoaderData<typeof loader>()
+  const { themeColor } = useLoaderData<typeof loader>()
   return (
     <html lang="en">
       <head>
@@ -39,12 +39,13 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body data-theme={themeColor || "dark"}>
+      <body data-theme={themeColor ?? "dark"}>
         <Header />
-        <main className="mt-4">
+        <main className="mt-4 mx-auto container">
           <Outlet />
         </main>
         <Footer />
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
