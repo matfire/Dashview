@@ -1,0 +1,177 @@
+---
+import InfoCard from "../components/InfoCard.astro";
+import { Octokit } from "@octokit/core";
+
+const octokit = new Octokit({ 
+  auth: process.env.GITHUB_TOKEN,
+});
+
+const repo = await octokit.request('GET /repos/{owner}/{repo}', {
+  owner: 'matfire',
+  repo: 'dashview',
+  headers: {
+    'X-GitHub-Api-Version': '2022-11-28'
+  }
+})
+
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Dashview</title>
+  </head>
+  <body class="dark">
+    <main>
+      <section class="bg-gray-900 text-white">
+        <div
+          class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"
+        >
+          <div class="mx-auto max-w-3xl text-center">
+            <h1
+              class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+            >
+              Your Service Dashboard
+
+              <span class="sm:block"> In Minutes.</span>
+            </h1>
+
+            <p class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+              dashview allows you to easily create a dashboard to check the
+              status of your services.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+              <a
+                class="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                href="https://docs.dashview.sh/guides/getting-started/"
+                target="_blank"
+              >
+                Get Started
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="bg-gray-900 text-white">
+        <div
+          class="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8"
+        >
+          <div class="mx-auto max-w-lg text-center">
+            <h2 class="text-3xl font-bold sm:text-4xl">Easy But Powerfull</h2>
+          </div>
+
+          <div
+            class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
+            <InfoCard
+              title="Powerfull"
+              description="built with the latest technology"
+              icon="carbon:power"
+            />
+            <InfoCard
+              title="Easy"
+              description="one config file to rule them all"
+              icon="carbon:lightning"
+            />
+            <InfoCard
+              title="Fast"
+              description="no need to restart the app, changes take effect on the next load"
+              icon="carbon:train-speed"
+            />
+          </div>
+        </div>
+      </section>
+      <section class="bg-white dark:bg-gray-900">
+        <div
+          class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+        >
+          <div class="mx-auto max-w-3xl text-center">
+            <h2
+              class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl"
+            >
+              Here's some stats
+            </h2>
+
+            <p class="mt-4 text-gray-500 dark:text-gray-400 sm:text-xl">
+              These are fetched directly from Github, so hopefully they are up to date.
+            </p>
+          </div>
+
+          <div class="mt-8 sm:mt-12">
+            <dl
+              class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:divide-x sm:divide-gray-100 dark:sm:divide-gray-800"
+            >
+              <div class="flex flex-col px-4 py-8 text-center">
+                <dt
+                  class="order-last text-lg font-medium text-gray-500 dark:text-gray-400"
+                >
+                  Stargazers
+                </dt>
+
+                <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
+                  { repo.data.stargazers_count }
+                </dd>
+              </div>
+
+              <div class="flex flex-col px-4 py-8 text-center">
+                <dt
+                  class="order-last text-lg font-medium text-gray-500 dark:text-gray-400"
+                >
+                  Open Issues
+                </dt>
+
+                <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
+                  {repo.data.open_issues_count}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section class="bg-gray-50 dark:bg-gray-900">
+        <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+          <div class="mx-auto max-w-lg text-center">
+            <h2
+              class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl"
+            >
+              What are you waiting for?
+            </h2>
+
+            <p class="hidden text-gray-500 dark:text-gray-400 sm:mt-4 sm:block">
+              Create your own dashboard today!
+            </p>
+          </div>
+
+          <div class="mx-auto mt-8 max-w-xl">
+            <a
+              href="https://docs.dashview.sh/guides/getting-started/"
+			  target="_blank"
+              class="group mt-4 flex w-full items-center justify-center gap-2 rounded-md bg-rose-600 px-5 py-3 text-white transition focus:outline-none focus:ring focus:ring-yellow-400 sm:mt-0 sm:w-auto"
+            >
+              <span class="text-sm font-medium"> Get Started</span>
+
+              <svg
+                class="h-5 w-5 rtl:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
