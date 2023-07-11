@@ -38,7 +38,7 @@ export default function AppCard({ app }: { app: App }) {
           offline ? "badge-error" : "badge-success"
         } animate-pulse`}
       ></span>
-      <div className="flex justify-between p-4 min-h-8 shadow-md bg-neutral">
+      <div className="flex justify-between p-4 min-h-8 shadow-md bg-neutral items-center">
         {app.icon && <Icon icon={app.icon} />}
         <p className="text-neutral-content">{app.name}</p>
         <a target="_blank" href={app.url} rel="noreferrer">
