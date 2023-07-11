@@ -1,9 +1,20 @@
 import { z } from "zod";
-import { getIcon, loadIcon, } from "@iconify/react";
+import { loadIcon } from "@iconify/react";
 
 const categorySchema = z.object({
   name: z.string({ required_error: "please provide a name for each category" }),
-  icon: z.string().optional(),
+  icon: z
+    .string()
+    .optional()
+    .refine(async (iconName) => {
+      if (!iconName) return true;
+      try {
+        await loadIcon(iconName);
+        return true;
+      } catch {
+        return false;
+      }
+    }, "please provid a valid icon name (following iconify standard)"),
   color: z
     .string()
     .regex(/^#[0-9A-F]{6}$/i, {
@@ -24,10 +35,10 @@ const appSchema = z.object({
   icon: z
     .string()
     .optional()
-    .refine(async(iconName) => {
+    .refine(async (iconName) => {
       if (!iconName) return true;
       try {
-        await loadIcon(iconName)
+        await loadIcon(iconName);
         return true;
       } catch {
         return false;

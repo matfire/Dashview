@@ -5,7 +5,8 @@
     },
     {
       "name": "Category2",
-      "color": "#FF0000"
+      "color": "#FF0000",
+      "icon": "grommet-icons:test"
     }
   ],
   "apps": [
