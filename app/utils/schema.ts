@@ -1,8 +1,20 @@
 import { z } from "zod";
+import { loadIcon } from "@iconify/react";
 
 const categorySchema = z.object({
-  name: z.string({required_error:"please provide a name for each category"}),
-  icon: z.string().optional(),
+  name: z.string({ required_error: "please provide a name for each category" }),
+  icon: z
+    .string()
+    .optional()
+    .refine(async (iconName) => {
+      if (!iconName) return true;
+      try {
+        await loadIcon(iconName);
+        return true;
+      } catch {
+        return false;
+      }
+    }, "please provid a valid icon name (following iconify standard)"),
   color: z
     .string()
     .regex(/^#[0-9A-F]{6}$/i, {
@@ -14,9 +26,24 @@ const categorySchema = z.object({
 
 const appSchema = z.object({
   category: z.string().optional(),
-  name: z.string({required_error:"please provide a name for each application"}),
-  url: z.string({required_error:"please provide a url for each application"}).url({message:"please provide a valid url for each application"}),
-  icon: z.string().optional(),
+  name: z.string({
+    required_error: "please provide a name for each application",
+  }),
+  url: z
+    .string({ required_error: "please provide a url for each application" })
+    .url({ message: "please provide a valid url for each application" }),
+  icon: z
+    .string()
+    .optional()
+    .refine(async (iconName) => {
+      if (!iconName) return true;
+      try {
+        await loadIcon(iconName);
+        return true;
+      } catch {
+        return false;
+      }
+    }, "please provid a valid icon name (following iconify standard)"),
 });
 
 const configSchema = z

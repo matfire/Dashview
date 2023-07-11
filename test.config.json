@@ -1,29 +1,30 @@
 {
-    "categories": [
-        {
-            "name":"Category1"
-        },
-        {
-            "name":"Category2",
-            "color":"#FF0000"
-        }
-    ],
-    "apps": [
-        {
-            "category": "Category1",
-            "name":"test",
-            "url":"http://test.com",
-            "icon":"home"
-        },
-        {
-            "category":"Category1",
-            "name":"test2",
-            "url":"http://example.com"
-        },
-        {
-            "category":"Category2",
-            "name":"test2",
-            "url":"http://test.com"
-        }
-    ]
+  "categories": [
+    {
+      "name": "Category1"
+    },
+    {
+      "name": "Category2",
+      "color": "#FF0000",
+      "icon": "grommet-icons:test"
+    }
+  ],
+  "apps": [
+    {
+      "category": "Category1",
+      "name": "test",
+      "url": "http://test.com",
+      "icon": "material-symbols:home"
+    },
+    {
+      "category": "Category1",
+      "name": "test2",
+      "url": "http://example.com"
+    },
+    {
+      "category": "Category2",
+      "name": "test2",
+      "url": "http://test.com"
+    }
+  ]
 }
