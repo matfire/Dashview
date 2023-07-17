@@ -1,8 +1,10 @@
 import type { LoaderFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import type { ZodIssue } from "zod";
 import CategoryCard from "~/components/CategoryCard";
 import { readFile } from "~/utils/fs.server";
+import type { App, Category } from "~/utils/schema";
 import configSchema from "~/utils/schema";
 
 export const meta: V2_MetaFunction = () => {
@@ -31,12 +33,12 @@ export default function Index() {
   if (data?.categories) {
     return (
       <div className="flex flex-wrap gap-4">
-        {data.categories.map((cat) => (
+        {data.categories.map((cat: Category) => (
           <CategoryCard
             key={cat.id || cat.name}
             category={cat}
             apps={data.apps.filter(
-              (e) => e.category === cat.name || e.category === cat.id
+              (e: App) => e.category === cat.name || e.category === cat.id
             )}
           />
         ))}
@@ -65,10 +67,11 @@ export default function Index() {
           </div>
         </div>
         <ul>
-          {data.error.issues.map((e) => (
+          {data.error.issues.map((e: ZodIssue) => (
             <li key={e.path.join()} className="p-4">
               <p>
-                {e.message} at {e.path.join("=>")}
+                {e.message}
+                <span>{e.path.join("=>") && ` at ${e.path.join("=>")}`}</span>
               </p>
             </li>
           ))}
