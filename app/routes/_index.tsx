@@ -31,7 +31,7 @@ export default function Index() {
 
   if (data?.categories) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="flex flex-wrap gap-4">
         {data.categories.map((cat) => (
           <CategoryCard
             key={cat.id || cat.name}
