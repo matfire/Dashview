@@ -27,7 +27,6 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  console.log(data);
 
   if (data?.categories) {
     return (
