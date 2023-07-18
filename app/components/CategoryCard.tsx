@@ -21,11 +21,11 @@ export default function CategoryCard({
       }
     >
       <div className="card-body">
-        <h2 className="card-title">
+        <h2 className="card-title space-x-2">
           {category.icon && <Icon icon={category.icon} />}
           {category.name}
         </h2>
-        <div className="w-full grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-2">
+        <div className="w-full flex flex-wrap justify-evenly gap-8 mt-2 items-center">
           {apps.map((app) => (
             <AppCard key={app.name} app={app} />
           ))}
