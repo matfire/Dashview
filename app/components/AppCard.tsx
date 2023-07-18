@@ -38,13 +38,15 @@ export default function AppCard({ app }: { app: App }) {
           offline ? "badge-error" : "badge-success"
         } animate-pulse`}
       ></span>
-      <div className="flex justify-between p-4 min-h-8 shadow-md bg-neutral items-center">
-        {app.icon && <Icon icon={app.icon} />}
+      <a
+        href={app.url}
+        target="_blank"
+        rel="noreferrer"
+        className="flex flex-col justify-center p-4 min-h-8 min-w-[8rem] shadow-md bg-neutral items-center hover:scale-105 transition-transform"
+      >
+        {app.icon && <Icon icon={app.icon} className="h-8 w-8" />}
         <p className="text-neutral-content">{app.name}</p>
-        <a target="_blank" href={app.url} rel="noreferrer">
-          &rarr;
-        </a>
-      </div>
+      </a>
     </div>
   );
 }

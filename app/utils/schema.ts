@@ -59,13 +59,12 @@ const configSchema = z
       if (!categories) {
         return !apps.some((e) => e.category);
       } else {
-        return apps.some((e) => {
-          return (
+        return apps.every(
+          (e) =>
             categories.findIndex(
               (c) => c.name === e.category || c.id === e.category
             ) !== -1
-          );
-        });
+        );
       }
     },
     { message: "if you use categories, each app should belong to a category" }
